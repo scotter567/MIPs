@@ -21,3 +21,4 @@ for i in range(len(inputs)):
     binary_list.append(new_val)
     new_val = ''
 
+#TESTGIT    
