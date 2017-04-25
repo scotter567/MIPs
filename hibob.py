@@ -1,5 +1,3 @@
-#print (10)
-
 hex_dict = {'0':'0000' , '1':'0001', '2':'0010', '3':'0011', '4':'0100', '5':'0101', '6':'0110', '7':'0111', '8':'1000',
             '9':'1001', 'A':'1010', 'B':'1011', 'C':'1100', 'D':'1101', 'E':'1110', 'F':'1111'}
 
@@ -10,15 +8,21 @@ memory = ['00000000', '00000000', '00000000', '00000000', '00000000', '00000000'
           '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000',
           '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000']
 
-new_val = ''
 binary_list = []
 
-for i in range(len(inputs)):
-    x = inputs[i]
-    #print (x)
-    for j in range(len(x)):
-        new_val = new_val + hex_dict[x[j]]
-    binary_list.append(new_val)
+def hex_binary(inputs):
     new_val = ''
 
-#STILLTESTGIT
+    for i in range(len(inputs)):
+        x = inputs[i]
+        #print (x)
+        for j in range(len(x)):
+            new_val = new_val + hex_dict[x[j]]
+        binary_list.append(new_val)
+        new_val = ''
+    return binary_list
+
+binary_list = hex_binary(inputs)
+
+for i in range(len(binary_list)):
+    print (binary_list[i])
