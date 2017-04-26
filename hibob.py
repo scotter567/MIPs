@@ -22,7 +22,39 @@ def hex_binary(inputs):
         new_val = ''
     return binary_list
 
+def r_get_command_line(y):
+    op = int ((y[:6]), 2)
+    rs = int ((y[6:11]), 2)
+    rt = int ((y[11:16]), 2)
+    rd = int ((y[16:21]), 2)
+    shift = int ((y[21:26]), 2)
+    funon = int ((y[26:]), 2)
+
+    return op, rs, rt, rd, shift, funon
+
+def i_get_command_line(y):
+    op = int (y[:6], 2)
+    rs = int (y[6:11], 2)
+    rt = int (y[11:16], 2)
+    Im = int (y[16:] , 2)
+
+    return op, rs, rt, Im
+
 binary_list = hex_binary(inputs)
 
 for i in range(len(binary_list)):
     print (binary_list[i])
+print ()
+
+command_list = []
+
+for i in range(len(binary_list)):
+    y = binary_list[i]
+    if (int(y[:6], 2)) == 0:
+        command_list.append((r_get_command_line(y)))
+
+    else:
+        command_list.append((i_get_command_line(y)))
+
+for i in range(len(command_list)):
+    print (command_list[i])
