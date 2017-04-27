@@ -1,4 +1,10 @@
 inputs = ['2041004C', '2062002B', '00221820', '00412822', 'AD010007', '8D090007']
+
+registers = ['00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000',
+          '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000',
+          '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000',
+          '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000']
+
 memory = ['00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000',
           '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000',
           '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000',
@@ -40,6 +46,11 @@ def i_get_command_line(y):
 
     return op, rs, rt, Im
 
+def run_r_type(command, reg):
+
+
+    return reg
+
 binary_list = hex_binary(inputs)
 
 for i in range(len(binary_list)):
@@ -56,5 +67,13 @@ for i in range(len(binary_list)):
     else:
         command_list.append((i_get_command_line(y)))
 
-for i in range(len(command_list)):
-    print (command_list[i])
+z = command_list[2]
+registers = run_r_type(z, registers)
+
+#for i in range(len(command_list)):
+#    z = command_list[i]
+#    print (z)
+#    if len(z) == 4:
+#        print ("This is an I Type")
+#    else:
+#        print ("This is a R Type")
