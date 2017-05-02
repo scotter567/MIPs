@@ -46,37 +46,38 @@ def i_get_command_line(y):
 
     return op, rs, rt, Im
 
-def bit_by_bit(x,y):
-#AND
+def bit_by_bit_and(x,y):
+    new_binary = ''
     for i in range(len(x), 0, -1):
         x1 = x[i-1]
         y1 = y[i-1]
 
         if x1 == '1' and y1 == '1':
-            print (1, end = '')
+            new_binary = '1' + new_binary
         else:
-            print (0, end = '')
-
-    print ()
+            new_binary = '0' + new_binary
+    return new_binary
 
 #OR
+def bit_by_bit_or(x,y):
+    new_binary = ''
     for i in range(len(x), 0, -1):
         x1 = x[i - 1]
         y1 = y[i - 1]
 
         if x1 == '0' and y1 == '0':
-            print (0, end = '')
+            new_binary = '0' + new_binary
         else:
-            print (1, end = '')
+            new_binary = '1' + new_binary
+    return new_binary
 
-    print ()
-    print ()
 #ADD
+def bit_by_bit_add(x,y):
     carry = 0
     new_binary = ''
-    print (x)
-    print (y)
-    print()
+#    print (x)
+#    print (y)
+#    print()
     for i in range(len(x), 0, -1):
         x1 = (x[i - 1])
         y1 = (y[i - 1])
@@ -87,12 +88,12 @@ def bit_by_bit(x,y):
                 carry = 1
             else:
                 new_binary = '0' + new_binary
-                carry = 0
+                carry = 1
 
         elif x1 == '1' and y1 == '0':
             if carry == 1:
                 new_binary = '0' + new_binary
-                carry = 0
+                carry = 1
             else:
                 new_binary = '1' + new_binary
                 carry = 0
@@ -100,7 +101,7 @@ def bit_by_bit(x,y):
         elif x1 == '0' and y1 == '1':
             if carry == 1:
                 new_binary = '0' + new_binary
-                carry = 0
+                carry = 1
             else:
                 new_binary = '1' + new_binary
                 carry = 0
@@ -112,11 +113,33 @@ def bit_by_bit(x,y):
             else:
                 new_binary = '0' + new_binary
                 carry = 0
-        print (new_binary, "Carry is: ",carry)
-#        print(carry)
-#        print()
     return new_binary
 
+def bit_by_bit_sub(x,y):
+    new_binary_sub = ''
+    print ('Sub stuff')
+    for i in range(len(y)):
+        if y[i] == '1':
+            new_binary_sub =  new_binary_sub + '0'
+        else:
+            new_binary_sub = new_binary_sub + '1'
+
+    new_binary_sub = bit_by_bit_add(new_binary_sub, '00000000000000000000000000000001')
+    new_binary_sub = bit_by_bit_add(x,new_binary_sub)
+
+    return new_binary_sub
+
+def bit_by_bit_xor(x,y):
+    new_binary = ''
+    for i in range(len(x), 0, -1):
+        x1 = x[i - 1]
+        y1 = y[i - 1]
+
+        if x1 == '1' and y1 == '1' or x1 == '0' and y1 == '0':
+            new_binary = '0' + new_binary
+        else:
+            new_binary = '1' + new_binary
+    return new_binary
 
 
 binary_list = hex_binary(inputs)
@@ -137,4 +160,4 @@ for i in range(len(binary_list)):
         command_list.append((i_get_command_line(y)))
 
 z = command_list[2]
-print (bit_by_bit(binary_list[0], binary_list[1]))
+print (bit_by_bit_xor(binary_list[0], binary_list[1]))
